@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Character JSON Save/Load</title>
+</head>
+<body>
+  <h1>Character Builder</h1>
+  
+  <label>Name: <input id="name" type="text"></label><br>
+  <label>Class: <input id="class" type="text"></label><br>
+  <label>Level: <input id="level" type="number"></label><br>
+  <button id="download">Download JSON</button>
+  <input type="file" id="upload" accept=".json">
+
+  <pre id="output"></pre>
+
+  <script>
+    const nameInput = document.getElementById('name');
+    const classInput = document.getElementById('class');
+    const levelInput = document.getElementById('level');
+    const output = document.getElementById('output');
+    const upload = document.getElementById('upload');
+
+    // Save to JSON file
+    document.getElementById('download').onclick = () => {
+      const data = {
+        name: nameInput.value,
+        class: classInput.value,
+        level: levelInput.value
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'character.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+
+    // Load JSON file
+    upload.onchange = event => {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const data = JSON.parse(e.target.result);
+        nameInput.value = data.name || '';
+        classInput.value = data.class || '';
+        levelInput.value = data.level || '';
+        output.textContent = JSON.stringify(data, null, 2);
+      };
+      reader.readAsText(file);
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<head>
+    <title>  Table role-playing system   </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <img src="png-klev-club-p-malina-png-7.png" alt="malina.png">
+            </div>
+            <div class="name">
+                <h1>Table role-playing System</h1>
+            </div>
+            <div class="menu-button">
+                <img src="nav-bar.png" id="showBar" alt="Menu.png">
+            </div>
+        </div>
+    </header>
+    
+    <div class="nav-container">
+        <div class="nav-row">
+            <div class="box">
+                <a href="main.html" class="home-link">Home</a>
+            </div>
+            <div class="box">
+                <a href="character.html">Create Character</a>
+            </div>
+            <div class="box">
+                <a href="spell.html">Spells</a>
+            </div>
+            <div class="box">
+                <a href="register.html">Register</a>
+            </div>
+            <div class="box">
+                <a href="rules.html">Rules</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <form id="userForm" class="row g-3 needs-validation" novalidate>
+        
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" id="firstName" class="form-control" placeholder="Enter first name" required maxlength="50">
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter your first name.</div>
+                </div>
+        
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" id="lastName" class="form-control" placeholder="Enter last name" required maxlength="50">
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter your last name.</div>
+                </div>
+        
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    <div class="form-text">We'll never share your email with anyone else.</div>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
+        
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter password" required minlength="6">
+                    <div class="form-text">Must be at least 6 characters long.</div>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid password.</div>
+                </div>
+        
+                <div class="col-md-6">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Re-enter password" required>
+                    <div class="valid-feedback">Passwords match!</div>
+                    <div class="invalid-feedback">Passwords do not match.</div>
+                </div>
+        
+                <fieldset class="col-md-6">
+                    <legend class="col-form-label">Gender</legend>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                    <div class="invalid-feedback">Please select a gender.</div>
+                </fieldset>
+        
+                <fieldset class="col-12">
+                    <legend class="col-form-label">Hobbies</legend>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="music" name="hobbies" value="Music">
+                        <label class="form-check-label" for="music">Music</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="movies" name="hobbies" value="Movies">
+                        <label class="form-check-label" for="movies">Movies</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="reading" name="hobbies" value="Reading">
+                        <label class="form-check-label" for="reading">Reading</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="programming" name="hobbies" value="Programming">
+                        <label class="form-check-label" for="programming">Programming</label>
+                    </div>
+                    <div class="invalid-feedback d-block" id="hobbiesFeedback">Please select at least one hobby.</div>
+                </fieldset>
+        
+                <div class="col-md-6">
+                    <label for="country" class="form-label">Country</label>
+                    <select id="country" class="form-select" required>
+                        <option value="">Choose country</option>
+                        <option>Kazakhstan</option>
+                        <option>USA</option>
+                        <option>Russia</option>
+                        <option>China</option>
+                        <option>UK</option>
+                        <option>Forgotten Realms</option>
+                        <option>Ursus</option>
+                        <option>Victoria</option>
+                    </select>
+                    <div class="invalid-feedback">Please select your country.</div>
+                </div>
+        
+                <div class="col-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+        
+                <div class="col-12 mt-3">
+                    <div id="result"></div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        © 2025 Comic System. All rights reserved.  
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('userForm');
+            const hobbiesFeedback = document.getElementById('hobbiesFeedback');
+            const resultDiv = document.getElementById('result');
+        
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+        
+                let isValid = form.checkValidity();
+        
+                const password = form.querySelector('#password');
+                const confirm = form.querySelector('#confirmPassword');
+                if (password.value !== confirm.value) {
+                    confirm.setCustomValidity("Passwords do not match");
+                    isValid = false;
+                } else {
+                    confirm.setCustomValidity("");
+                }
+        
+                const checkedHobbies = form.querySelectorAll('input[name="hobbies"]:checked');
+                if (checkedHobbies.length === 0) {
+                    hobbiesFeedback.style.display = 'block';
+                    isValid = false;
+                } else {
+                    hobbiesFeedback.style.display = 'none';
+                }
+        
+                form.classList.add('was-validated');
+        
+                if (!isValid) return;
+                const data = {
+                    firstName: form.firstName.value,
+                    lastName: form.lastName.value,
+                    email: form.email.value,
+                    password: form.password.value,
+                    gender: form.gender.value,
+                    hobbies: Array.from(checkedHobbies).map(h => h.value),
+                    country: form.country.value
+                };
+        
+                try {
+                    const response = await fetch('https://jsonplaceholder.typicode.com/posts', { 
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    const result = await response.json();
+        
+                    resultDiv.innerHTML = `<div class="alert alert-success">Form submitted successfully! Received ID: ${result.id}</div>`;
+                    form.reset();
+                    form.classList.remove('was-validated');
+                } catch (error) {
+                    resultDiv.innerHTML = `<div class="alert alert-danger">Error submitting form: ${error}</div>`;
+                }
+            });
+        });
+    </script>
+    <script src="theme.js"></script>
+</body>

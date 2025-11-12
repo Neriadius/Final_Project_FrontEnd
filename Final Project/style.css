@@ -1,0 +1,212 @@
+/* BASE STYLES */
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* RESPONSIVE BOXES */
+@media (max-width: 600px) {
+    .box { flex: 0 0 100%; }
+}
+@media (min-width: 601px) and (max-width: 1024px) {
+    .box { flex: 0 0 50%; }
+}
+@media (min-width: 1025px) {
+    .box { flex: 0 0 25%; }
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between; /* space between logo+name and menu button */
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #363636;
+  color: white;
+}
+
+.logo img {
+  width: 65px;
+  height: auto;
+}
+
+.name h1 {
+  margin-left: 15px;
+  font-size: 24px;
+}
+
+#showBar {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#showBar.rotated {
+  transform: rotate(90deg);
+}
+
+/* menu button */
+.menu-button img {
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+}
+
+/* NAVIGATION */
+.nav-container {
+  width: 100%;
+  background-color: #7a7a7a;
+  box-sizing: border-box;
+  display: none; /* initially hidden */
+}
+
+.nav-row {
+  display: flex; /* align boxes in a row */
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.box {
+  text-align: center;
+  background-color: #3c3c3c;
+  border: 1px solid #3c3c3c;
+  height: 80px;
+  flex: 1 1 150px; /* responsive width */
+}
+
+.box a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+  text-decoration: none;
+  line-height: 80px;
+}
+
+.box a:hover {
+  background-color: #1c1c1c;
+  color: #ffffff;
+}
+
+.home-link {
+  background-color: #1c1c1c;
+}
+
+/* MAIN */
+.main-content {
+    flex: 1;
+    min-height: calc(100vh - 240px);
+    padding: 20px;
+}
+.home-content {
+    max-width: 1200px;
+    margin: 10px auto;
+    padding: 40px;
+    background-color: rgba(47, 47, 47, 0.7);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+.home-content p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+    text-align: justify;
+    margin-bottom: 0;
+}
+.home-content p::first-line {
+    color: #f5f5f5;
+    font-weight: 500;
+}
+
+/* Spell create */
+
+.unord-list {
+    list-style: none;
+    padding: 0;
+}
+
+.unord-list li {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.unord-list li .task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.unord-list li .task-header h3 {
+    margin: 0;
+}
+
+.unord-list li .task-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.unord-list li .task-buttons button img {
+    width: 20px;
+    height: 20px;
+}
+
+body.dark-mode .unord-list li {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    color: #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .unord-list li .task-header h3 {
+    color: #f0f0f0;
+}
+
+body.dark-mode .unord-list li .task-desc p {
+    color: #dcdcdc;
+}
+
+body.dark-mode .unord-list li .task-buttons button img {
+    filter: invert(1);
+}
+
+body.dark-mode .unord-list li:hover {
+    background-color: #2a2a2a;
+    border-color: #555;
+}
+
+/* FOOTER */
+.footer {
+    width: 100%;
+    background-color: #585858;
+    color: #ccc;
+    text-align: center;
+    padding: 15px 0;
+    border-top: 1px solid #333;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* DARK MODE */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+body.dark-mode .header { background-color: #2c2c2c; color: #fff; }
+body.dark-mode .nav-container { background-color: #2a2a2a; }
+body.dark-mode .box { background-color: #3c3c3c; border-color: #3c3c3c; }
+body.dark-mode .box a:hover { background-color: #1c1c1c; }
+body.dark-mode .main-content { background-color: #1a1a1a; }
+body.dark-mode .home-content { background-color: rgba(30, 30, 30, 0.8); box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+body.dark-mode .footer { background-color: #333; color: #ccc; }

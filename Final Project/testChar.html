@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Character Builder</title>
+</head>
+<body>
+  <h1>Character Builder</h1>
+  
+  <label>Name: <input id="name" type="text"></label><br>
+  <label>Class: <input id="class" type="text"></label><br>
+  <label>Level: <input id="level" type="number"></label><br>
+  <button id="save">Save</button>
+  <button id="load">Load</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    const nameInput = document.getElementById('name');
+    const classInput = document.getElementById('class');
+    const levelInput = document.getElementById('level');
+    const output = document.getElementById('output');
+
+    document.getElementById('save').onclick = () => {
+      const character = {
+        name: nameInput.value,
+        class: classInput.value,
+        level: levelInput.value
+      };
+      localStorage.setItem('characterData', JSON.stringify(character));
+      output.textContent = 'Saved!';
+    };
+
+    document.getElementById('load').onclick = () => {
+      const saved = localStorage.getItem('characterData');
+      if (saved) {
+        const data = JSON.parse(saved);
+        nameInput.value = data.name;
+        classInput.value = data.class;
+        levelInput.value = data.level;
+        output.textContent = JSON.stringify(data, null, 2);
+      } else {
+        output.textContent = 'No saved data.';
+      }
+    };
+  </script>
+</body>
+</html>
