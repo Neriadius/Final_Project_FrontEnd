@@ -54,323 +54,363 @@ $(document).ready(function(){
 });
 
 
-//Strengh attribute
-$(document).ready(function(){
+// Strength attribute logic
+$(document).ready(function () {
     const lvlSt = document.getElementById('lvlSt');
     const cureExpInput = document.getElementById('cureExp');
 
+    // List of Strength-related attributes
     const attributes = [
-    { input: document.getElementById('athl'), prev: 0 },
-    { input: document.getElementById('durab'), prev: 0 },
-    { input: document.getElementById('surv'), prev: 0 },
+        { input: document.getElementById('athl'), prev: 0 },
+        { input: document.getElementById('durab'), prev: 0 },
+        { input: document.getElementById('surv'), prev: 0 },
     ];
 
+    // Calculates total experience cost to move from oldLevel → newLevel
     function getExpCost(oldLevel, newLevel) {
         let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
+        // Always iterate in increasing order (1 → 2 → 3 ...)
+        const start = Math.min(oldLevel, newLevel) + 1;
+        const end = Math.max(oldLevel, newLevel);
+        for (let lvl = start; lvl <= end; lvl++) {
             cost += lvl * 2;
         }
         return cost;
     }
 
+    // Updates Strength total level and current experience value
     function updateAttributes() {
-    let totalLvl = 0;
-    let cureExp = parseInt(cureExpInput.value) || 0;
+        let totalLvl = 0;
+        let cureExp = parseInt(cureExpInput.value) || 0;
 
-    attributes.forEach(attr => {
-        const newValue = parseInt(attr.input.value) || 0;
-            if (newValue > attr.prev) {
-                cureExp -= getExpCost(attr.prev, newValue);
+        attributes.forEach(attr => {
+            const newValue = parseInt(attr.input.value) || 0;
+
+            if (newValue !== attr.prev) {
+                const cost = getExpCost(attr.prev, newValue);
+
+                // If increased → subtract cost
+                // If decreased → add cost back
+                if (newValue > attr.prev) {
+                    cureExp -= cost;
+                } else {
+                    cureExp += cost;
+                }
+
+                attr.prev = newValue;
             }
-
-            attr.prev = newValue;
 
             totalLvl += newValue;
         });
 
-            if (cureExp < 0) cureExp = 0;
-
-            cureExpInput.value = cureExp;
-            lvlSt.textContent = totalLvl;
+        // Update display values
+        cureExpInput.value = cureExp;
+        lvlSt.textContent = totalLvl;
     }
 
-    function getExpCost(oldLevel, newLevel) {
-        let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
-            cost += lvl * 2;
-        }
-        return cost;
-    }
-
+    // Attach listener to each attribute input
     attributes.forEach(attr => {
         attr.input.addEventListener('input', updateAttributes);
     });
 });
 
 
-//dexterity
-$(document).ready(function(){
+// Dexterity attribute logic
+$(document).ready(function () {
     const lvlDx = document.getElementById('lvlDx');
     const cureExpInput = document.getElementById('cureExp');
 
+    // List of Dexterity-related attributes
     const attributesDx = [
-    { input: document.getElementById('spe'), prev: 0 },
-    { input: document.getElementById('stl'), prev: 0 },
-    { input: document.getElementById('dex'), prev: 0 },
+        { input: document.getElementById('spe'), prev: 0 },
+        { input: document.getElementById('stl'), prev: 0 },
+        { input: document.getElementById('dex'), prev: 0 },
     ];
 
+    // Calculates total experience cost to move from oldLevel → newLevel
     function getExpCost(oldLevel, newLevel) {
         let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
+        const start = Math.min(oldLevel, newLevel) + 1;
+        const end = Math.max(oldLevel, newLevel);
+        for (let lvl = start; lvl <= end; lvl++) {
             cost += lvl * 2;
         }
         return cost;
     }
 
+    // Updates Dexterity total level and current experience value
     function updateAttributes() {
-    let totalLvl = 0;
-    let cureExp = parseInt(cureExpInput.value) || 0;
+        let totalLvl = 0;
+        let cureExp = parseInt(cureExpInput.value) || 0;
 
-    attributesDx.forEach(attr => {
-        const newValue = parseInt(attr.input.value) || 0;
-            if (newValue > attr.prev) {
-                cureExp -= getExpCost(attr.prev, newValue);
+        attributesDx.forEach(attr => {
+            const newValue = parseInt(attr.input.value) || 0;
+
+            if (newValue !== attr.prev) {
+                const cost = getExpCost(attr.prev, newValue);
+
+                // If increased → subtract cost
+                // If decreased → add cost back
+                if (newValue > attr.prev) {
+                    cureExp -= cost;
+                } else {
+                    cureExp += cost;
+                }
+
+                attr.prev = newValue;
             }
-
-            attr.prev = newValue;
 
             totalLvl += newValue;
         });
 
-            if (cureExp < 0) cureExp = 0;
-
-            cureExpInput.value = cureExp;
-            lvlDx.textContent = totalLvl;
+        // Update display values
+        cureExpInput.value = cureExp;
+        lvlDx.textContent = totalLvl;
     }
 
-    function getExpCost(oldLevel, newLevel) {
-        let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
-            cost += lvl * 2;
-        }
-        return cost;
-    }
-
+    // Attach listener to each attribute input
     attributesDx.forEach(attr => {
         attr.input.addEventListener('input', updateAttributes);
     });
 });
 
 
-//int
-$(document).ready(function(){
+
+// Intelligence attribute logic
+$(document).ready(function () {
     const lvlInt = document.getElementById('lvlInt');
     const cureExpInput = document.getElementById('cureExp');
 
+    // List of Intelligence-related attributes
     const attributesInt = [
-    { input: document.getElementById('anl'), prev: 0 },
-    { input: document.getElementById('sci'), prev: 0 },
-    { input: document.getElementById('sbt'), prev: 0 },
+        { input: document.getElementById('anl'), prev: 0 },
+        { input: document.getElementById('sci'), prev: 0 },
+        { input: document.getElementById('sbt'), prev: 0 },
     ];
 
+    // Calculates total experience cost to move from oldLevel → newLevel
     function getExpCost(oldLevel, newLevel) {
         let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
+        const start = Math.min(oldLevel, newLevel) + 1;
+        const end = Math.max(oldLevel, newLevel);
+        for (let lvl = start; lvl <= end; lvl++) {
             cost += lvl * 2;
         }
         return cost;
     }
 
+    // Updates Intelligence total level and current experience value
     function updateAttributes() {
-    let totalLvl = 0;
-    let cureExp = parseInt(cureExpInput.value) || 0;
+        let totalLvl = 0;
+        let cureExp = parseInt(cureExpInput.value) || 0;
 
-    attributesInt.forEach(attr => {
-        const newValue = parseInt(attr.input.value) || 0;
-            if (newValue > attr.prev) {
-                cureExp -= getExpCost(attr.prev, newValue);
+        attributesInt.forEach(attr => {
+            const newValue = parseInt(attr.input.value) || 0;
+
+            if (newValue !== attr.prev) {
+                const cost = getExpCost(attr.prev, newValue);
+
+                // If increased → subtract cost
+                // If decreased → add cost back
+                if (newValue > attr.prev) {
+                    cureExp -= cost;
+                } else {
+                    cureExp += cost;
+                }
+
+                attr.prev = newValue;
             }
-
-            attr.prev = newValue;
 
             totalLvl += newValue;
         });
 
-            if (cureExp < 0) cureExp = 0;
-
-            cureExpInput.value = cureExp;
-            lvlInt.textContent = totalLvl;
+        // Update display values
+        cureExpInput.value = cureExp;
+        lvlInt.textContent = totalLvl;
     }
 
-    function getExpCost(oldLevel, newLevel) {
-        let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
-            cost += lvl * 2;
-        }
-        return cost;
-    }
-
+    // Attach listener to each attribute input
     attributesInt.forEach(attr => {
         attr.input.addEventListener('input', updateAttributes);
     });
 });
 
 
-//charisma
-$(document).ready(function(){
+
+// Charisma attribute logic
+$(document).ready(function () {
     const lvlChr = document.getElementById('lvlChr');
     const cureExpInput = document.getElementById('cureExp');
 
+    // List of Charisma-related attributes
     const attributesChr = [
-    { input: document.getElementById('tlk'), prev: 0 },
-    { input: document.getElementById('wil'), prev: 0 },
-    { input: document.getElementById('cnc'), prev: 0 },
+        { input: document.getElementById('tlk'), prev: 0 },
+        { input: document.getElementById('wil'), prev: 0 },
+        { input: document.getElementById('cnc'), prev: 0 },
     ];
 
+    // Calculates total experience cost to move from oldLevel → newLevel
     function getExpCost(oldLevel, newLevel) {
         let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
+        const start = Math.min(oldLevel, newLevel) + 1;
+        const end = Math.max(oldLevel, newLevel);
+        for (let lvl = start; lvl <= end; lvl++) {
             cost += lvl * 2;
         }
         return cost;
     }
 
+    // Updates Charisma total level and current experience value
     function updateAttributes() {
-    let totalLvl = 0;
-    let cureExp = parseInt(cureExpInput.value) || 0;
+        let totalLvl = 0;
+        let cureExp = parseInt(cureExpInput.value) || 0;
 
-    attributesChr.forEach(attr => {
-        const newValue = parseInt(attr.input.value) || 0;
-            if (newValue > attr.prev) {
-                cureExp -= getExpCost(attr.prev, newValue);
+        attributesChr.forEach(attr => {
+            const newValue = parseInt(attr.input.value) || 0;
+
+            if (newValue !== attr.prev) {
+                const cost = getExpCost(attr.prev, newValue);
+
+                // If increased → subtract cost
+                // If decreased → add cost back
+                if (newValue > attr.prev) {
+                    cureExp -= cost;
+                } else {
+                    cureExp += cost;
+                }
+
+                attr.prev = newValue;
             }
-
-            attr.prev = newValue;
 
             totalLvl += newValue;
         });
 
-            if (cureExp < 0) cureExp = 0;
-
-            cureExpInput.value = cureExp;
-            lvlChr.textContent = totalLvl;
+        // Update display values
+        cureExpInput.value = cureExp;
+        lvlChr.textContent = totalLvl;
     }
 
-    function getExpCost(oldLevel, newLevel) {
-        let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
-            cost += lvl * 2;
-        }
-        return cost;
-    }
-
+    // Attach listener to each attribute input
     attributesChr.forEach(attr => {
         attr.input.addEventListener('input', updateAttributes);
     });
 });
 
-//instinct
-$(document).ready(function(){
+
+// Instinct attribute logic
+$(document).ready(function () {
     const lvlNst = document.getElementById('lvlNst');
     const cureExpInput = document.getElementById('cureExp');
 
+    // List of Instinct-related attributes
     const attributesNst = [
-    { input: document.getElementById('rfl'), prev: 0 },
-    { input: document.getElementById('aim'), prev: 0 },
-    { input: document.getElementById('sns'), prev: 0 },
+        { input: document.getElementById('rfl'), prev: 0 },
+        { input: document.getElementById('aim'), prev: 0 },
+        { input: document.getElementById('sns'), prev: 0 },
     ];
 
+    // Calculates total experience cost to move from oldLevel → newLevel
     function getExpCost(oldLevel, newLevel) {
         let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
+        const start = Math.min(oldLevel, newLevel) + 1;
+        const end = Math.max(oldLevel, newLevel);
+        for (let lvl = start; lvl <= end; lvl++) {
             cost += lvl * 2;
         }
         return cost;
     }
 
+    // Updates Instinct total level and current experience value
     function updateAttributes() {
-    let totalLvl = 0;
-    let cureExp = parseInt(cureExpInput.value) || 0;
+        let totalLvl = 0;
+        let cureExp = parseInt(cureExpInput.value) || 0;
 
-    attributesNst.forEach(attr => {
-        const newValue = parseInt(attr.input.value) || 0;
-            if (newValue > attr.prev) {
-                cureExp -= getExpCost(attr.prev, newValue);
+        attributesNst.forEach(attr => {
+            const newValue = parseInt(attr.input.value) || 0;
+
+            if (newValue !== attr.prev) {
+                const cost = getExpCost(attr.prev, newValue);
+
+                // If increased → subtract cost
+                // If decreased → add cost back
+                if (newValue > attr.prev) {
+                    cureExp -= cost;
+                } else {
+                    cureExp += cost;
+                }
+
+                attr.prev = newValue;
             }
-
-            attr.prev = newValue;
 
             totalLvl += newValue;
         });
 
-            if (cureExp < 0) cureExp = 0;
-
-            cureExpInput.value = cureExp;
-            lvlNst.textContent = totalLvl;
+        // Update display values
+        cureExpInput.value = cureExp;
+        lvlNst.textContent = totalLvl;
     }
 
-    function getExpCost(oldLevel, newLevel) {
-        let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
-            cost += lvl * 2;
-        }
-        return cost;
-    }
-
+    // Attach listener to each attribute input
     attributesNst.forEach(attr => {
         attr.input.addEventListener('input', updateAttributes);
     });
 });
 
 
-//magic
-$(document).ready(function(){
+// Magic attribute logic
+$(document).ready(function () {
     const lvlMgc = document.getElementById('lvlMgc');
     const cureExpInput = document.getElementById('cureExp');
 
+    // List of Magic-related attributes
     const attributesMgc = [
-    { input: document.getElementById('sns1'), prev: 0 },
-    { input: document.getElementById('sns2'), prev: 0 },
-    { input: document.getElementById('sns3'), prev: 0 },
+        { input: document.getElementById('sns1'), prev: 0 },
+        { input: document.getElementById('sns2'), prev: 0 },
+        { input: document.getElementById('sns3'), prev: 0 },
     ];
 
+    // Calculates total experience cost to move from oldLevel → newLevel
     function getExpCost(oldLevel, newLevel) {
         let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
+        const start = Math.min(oldLevel, newLevel) + 1;
+        const end = Math.max(oldLevel, newLevel);
+        for (let lvl = start; lvl <= end; lvl++) {
             cost += lvl * 2;
         }
         return cost;
     }
 
+    // Updates Magic total level and current experience value
     function updateAttributes() {
-    let totalLvl = 0;
-    let cureExp = parseInt(cureExpInput.value) || 0;
+        let totalLvl = 0;
+        let cureExp = parseInt(cureExpInput.value) || 0;
 
-    attributesMgc.forEach(attr => {
-        const newValue = parseInt(attr.input.value) || 0;
-            if (newValue > attr.prev) {
-                cureExp -= getExpCost(attr.prev, newValue);
+        attributesMgc.forEach(attr => {
+            const newValue = parseInt(attr.input.value) || 0;
+
+            if (newValue !== attr.prev) {
+                const cost = getExpCost(attr.prev, newValue);
+
+                // If increased → subtract cost
+                // If decreased → add cost back
+                if (newValue > attr.prev) {
+                    cureExp -= cost;
+                } else {
+                    cureExp += cost;
+                }
+
+                attr.prev = newValue;
             }
-
-            attr.prev = newValue;
 
             totalLvl += newValue;
         });
 
-            if (cureExp < 0) cureExp = 0;
-
-            cureExpInput.value = cureExp;
-            lvlMgc.textContent = totalLvl;
+        // Update display values
+        cureExpInput.value = cureExp;
+        lvlMgc.textContent = totalLvl;
     }
 
-    function getExpCost(oldLevel, newLevel) {
-        let cost = 0;
-        for (let lvl = oldLevel + 1; lvl <= newLevel; lvl++) {
-            cost += lvl * 2;
-        }
-        return cost;
-    }
-
+    // Attach listener to each attribute input
     attributesMgc.forEach(attr => {
         attr.input.addEventListener('input', updateAttributes);
     });
